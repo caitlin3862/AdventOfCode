@@ -6,15 +6,44 @@ import java.util.Scanner;
 public class Day2 {
     public static void main(String[] args) {
 
-        int safe = 0;
+        int safeCount = 0;
         ArrayList<String> fileData = getFileData("src/Day2Input.txt");
         for (int i = 0; i < fileData.size(); i++){
             String[] report = fileData.get(i).split(" ");
-            for (int j = 0; j < report.length; j++){
-                // check the conditions
+            boolean increasing = false;
+            boolean decreasing = false;
+            boolean safe = true;
+            int unsafeCount = 0;
+            for (int j = 1; j < report.length; j++){
+                int num1 = Integer.parseInt(report[j-1]);
+                int num2 = Integer.parseInt(report[j]);
+                if (num1 > num2){
+                    increasing = true;
+                } else if (num2 > num1) {
+                    decreasing = true;
+                } else {
+                    safe = false;
+                }
+                if (safe){
+                    if (increasing && !(num1 - num2 >= 1 && num1 - num2 <= 3)){
+                        unsafeCount++;
+                        safe = false;
+                    } else {
+                        if (decreasing && !(num2 - num1 >= 1 && num2 - num1 <= 3)) {
+                            unsafeCount++;
+                            safe = false;
+                        }
+                    }
+                }
+                if (!safe && unsafeCount == 1){
+                    safe = true;
+                }
+            }
+            if (safe){
+                safeCount++;
             }
         }
-
+        System.out.println("safe: " + safeCount);
     }
 
     public static ArrayList<String> getFileData(String fileName) {
