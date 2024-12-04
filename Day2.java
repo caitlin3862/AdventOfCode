@@ -7,7 +7,7 @@ public class Day2 {
     public static void main(String[] args) {
 
         int safe = 0;
-        ArrayList<String> fileData = getFileData("src/Day1Input.txt");
+        ArrayList<String> fileData = getFileData("src/Day2Input.txt");
         for (int i = 0; i < fileData.size(); i++){
             String[] report = fileData.get(i).split(" ");
             for (int j = 0; j < report.length; j++){
