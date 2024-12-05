@@ -13,7 +13,6 @@ public class Day2 {
             boolean increasing = false;
             boolean decreasing = false;
             boolean safe = true;
-            int unsafeCount = 0;
             for (int j = 1; j < report.length; j++){
                 int num1 = Integer.parseInt(report[j-1]);
                 int num2 = Integer.parseInt(report[j]);
@@ -26,17 +25,12 @@ public class Day2 {
                 }
                 if (safe){
                     if (increasing && !(num1 - num2 >= 1 && num1 - num2 <= 3)){
-                        unsafeCount++;
                         safe = false;
                     } else {
                         if (decreasing && !(num2 - num1 >= 1 && num2 - num1 <= 3)) {
-                            unsafeCount++;
                             safe = false;
                         }
                     }
-                }
-                if (!safe && unsafeCount == 1){
-                    safe = true;
                 }
             }
             if (safe){
