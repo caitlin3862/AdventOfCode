@@ -9,7 +9,6 @@ public class Day3 {
     public static void main(String[] args) {
 
         ArrayList<String> fileData = getFileData("src/Day3Input.txt");
-        System.out.println(fileData);
         ArrayList<String> allMatches = new ArrayList<>();
         for (int i = 0; i< fileData.size(); i++) {
             String searchString = fileData.get(i);
@@ -19,7 +18,19 @@ public class Day3 {
                 allMatches.add(m.group());
             }
         }
-        System.out.println(allMatches);
+
+        int total = 0;
+        for (int i = 0; i < allMatches.size(); i++){
+            int idxP = allMatches.get(i).indexOf("(");
+            int idxC = allMatches.get(i).indexOf(",");
+
+            int num1 = Integer.parseInt(allMatches.get(i).substring(idxP+1, idxC));
+            int num2 = Integer.parseInt(allMatches.get(i).substring(idxC+1, allMatches.get(i).length()-1));
+
+            total += (num1*num2);
+        }
+
+        System.out.println("Total: " + total);
     }
 
     public static ArrayList<String> getFileData(String fileName) {
